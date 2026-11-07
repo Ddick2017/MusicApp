@@ -7,7 +7,7 @@ const EXT = /\.(mp3|flac|ogg|opus|m4a|wav|aac)$/i;
 const cfgFile = () => path.join(app.getPath('userData'), 'cfg.json');
 const readCfg = () => { try { return JSON.parse(fs.readFileSync(cfgFile(), 'utf8')); } catch { return {}; } };
 let mm; const getMM = async () => mm || (mm = await import('music-metadata'));
-const toUrl = p => 'music://local' + p.split('/').map(encodeURIComponent).join('/');
+const toUrl = p => 'music://local/' + p.replace(/\\/g, '/').replace(/^\/+/, '').split('/').map(encodeURIComponent).join('/');
 
 function walk(d, out = []) {
   for (const e of fs.readdirSync(d, { withFileTypes: true })) {
@@ -116,9 +116,13 @@ async function findLyrics(t) {
   return { text: '', dur: 0 };
 }
 
+function fromUrl(u) {
+  const p = decodeURIComponent(new URL(u).pathname);
+  return process.platform === 'win32' ? p.replace(/^\//, '') : p;
+}
 const MIME = { '.mp3': 'audio/mpeg', '.flac': 'audio/flac', '.ogg': 'audio/ogg', '.opus': 'audio/ogg', '.m4a': 'audio/mp4', '.wav': 'audio/wav', '.aac': 'audio/aac' };
 function musicResponse(req) {
-  const p = decodeURIComponent(new URL(req.url).pathname);
+  const p = fromUrl(req.url);
   let size;
   try { size = fs.statSync(p).size; } catch { return new Response('not found', { status: 404 }); }
   const h = { 'Content-Type': MIME[path.extname(p).toLowerCase()] || 'application/octet-stream', 'Accept-Ranges': 'bytes', 'Access-Control-Allow-Origin': '*' };

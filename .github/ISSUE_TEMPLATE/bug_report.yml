@@ -1,0 +1,47 @@
+name: Сообщить об ошибке
+description: Что-то не работает или работает не так
+title: "[Ошибка] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Спасибо, что сообщаете! Заполните поля ниже, так проще найти причину.
+  - type: dropdown
+    id: install
+    attributes:
+      label: Как вы установили программу
+      options:
+        - .deb
+        - AppImage
+        - tar.gz
+    validations:
+      required: true
+  - type: input
+    id: system
+    attributes:
+      label: Ваш дистрибутив и версия
+      placeholder: Debian 13
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: Что произошло
+      description: Что вы ожидали увидеть и что получилось на самом деле
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Как повторить ошибку
+      placeholder: "1. Выбрать папку...\n2. Нажать на трек...\n3. ..."
+  - type: input
+    id: track
+    attributes:
+      label: Название файла (если проблема с текстом песни)
+  - type: textarea
+    id: logs
+    attributes:
+      label: Вывод терминала (если есть)
+      description: Запустите программу из терминала и скопируйте сообщения об ошибках
+      render: shell

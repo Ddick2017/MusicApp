@@ -1,6 +1,6 @@
 *{box-sizing:border-box;margin:0}
 html,body{height:100%;overflow:hidden;background:#000;color:#fff;
-  font-family:"Inter","SF Pro Display","Helvetica Neue",Arial,sans-serif}
+  font-family:"Inter","SF Pro Display","Segoe UI","Helvetica Neue",Arial,sans-serif}
 #bg{position:fixed;inset:-80px;background:#111 center/cover;filter:grayscale(1) blur(60px) brightness(.55);
   transform:scale(1.2);transition:background-image .6s}
 #grain{position:fixed;inset:0;opacity:.18;pointer-events:none;mix-blend-mode:overlay;

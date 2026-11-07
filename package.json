@@ -1,12 +1,28 @@
 {
   "name": "musicapp",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Музыкальный плеер с синхронизированным текстом песен",
   "author": "Music Player <music@example.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/Ddick2017/MusicApp",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ddick2017/MusicApp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ddick2017/MusicApp/issues"
+  },
+  "keywords": [
+    "music-player",
+    "lyrics",
+    "linux",
+    "electron"
+  ],
   "main": "main.js",
   "scripts": {
     "start": "electron . --no-sandbox",
-    "dist": "electron-builder --linux AppImage deb rpm tar.gz --publish never"
+    "dist": "electron-builder --linux AppImage deb rpm tar.gz --publish never",
+    "dist:win": "electron-builder --win nsis portable --publish never"
   },
   "dependencies": {
     "music-metadata": "^10.6.0"
@@ -45,6 +61,23 @@
       "maintainer": "Music Player <music@example.com>",
       "synopsis": "Music player with synced lyrics",
       "executableName": "music-player"
-    }
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "shortcutName": "Music",
+      "artifactName": "Music-Setup-${version}.exe"
+    },
+    "portable": {
+      "artifactName": "Music-portable-${version}.exe"
+    },
+    "afterPack": "build/afterPack.js"
   }
 }
