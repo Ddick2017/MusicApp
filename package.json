@@ -1,0 +1,50 @@
+{
+  "name": "musicapp",
+  "version": "1.0.0",
+  "description": "Музыкальный плеер с синхронизированным текстом песен",
+  "author": "Music Player <music@example.com>",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron . --no-sandbox",
+    "dist": "electron-builder --linux AppImage deb rpm tar.gz --publish never"
+  },
+  "dependencies": {
+    "music-metadata": "^10.6.0"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.local.musicplayer",
+    "productName": "Music",
+    "asar": false,
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer.js",
+      "viz.js",
+      "index.html",
+      "style.css",
+      "package.json",
+      "build/icon.png"
+    ],
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm",
+        "tar.gz"
+      ],
+      "category": "AudioVideo",
+      "icon": "build/icon.png",
+      "maintainer": "Music Player <music@example.com>",
+      "synopsis": "Music player with synced lyrics",
+      "executableName": "music-player"
+    }
+  }
+}

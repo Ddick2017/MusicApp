@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; media-src music:; style-src 'self' 'unsafe-inline'">
+<title>Плеер</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="bg"></div><div id="grain"></div><canvas id="snow"></canvas>
+<main>
+  <section class="left">
+    <div class="card cover"><canvas id="viz"></canvas></div>
+    <div class="card player">
+      <div class="row">
+        <div class="meta"><b id="title">Выберите папку с музыкой</b><span id="artist"></span></div>
+        <div class="ctl">
+          <button id="prev" title="Назад">⏮</button>
+          <button id="play" class="main" title="Играть / пауза">▶</button>
+          <button id="next" title="Вперёд">⏭</button>
+        </div>
+      </div>
+      <input id="seek" type="range" min="0" max="1000" value="0">
+      <div class="times"><span id="cur">0:00</span><span id="left">-0:00</span></div>
+    </div>
+    <div class="card list">
+      <div class="head"><span>Библиотека</span>
+        <span><button id="shuf" title="Перемешать"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg></button><button id="open">Выбрать папку</button></span></div>
+      <ul id="tracks"></ul>
+    </div>
+  </section>
+  <section class="right"><div id="lyrics"><p class="empty">Текст песни появится здесь</p></div></section>
+</main>
+<button id="chg" type="button" title="Сменить текст песни (Ctrl+F)">Сменить текст</button>
+<div id="sync"></div>
+<form id="finder" hidden><div id="picks"></div><div class="frow"><input id="q" type="text" placeholder="Название песни (можно с исполнителем)" autocomplete="off" spellcheck="false"><button type="submit">Найти текст</button><button type="button" id="auto" title="Искать текст автоматически">Авто</button></div></form>
+<script src="renderer.js"></script>
+<script src="viz.js"></script>
+</body>
+</html>
