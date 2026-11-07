@@ -74,3 +74,4 @@ ul::-webkit-scrollbar{width:6px}ul::-webkit-scrollbar-thumb{background:rgba(255,
 #chg:hover{background:rgba(255,255,255,.22)}
 #finder #auto{background:rgba(255,255,255,.14);color:#fff}
 #finder #auto:hover{background:rgba(255,255,255,.28)}
+.ctl button{display:inline-flex;align-items:center;justify-content:center}

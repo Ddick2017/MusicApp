@@ -94,7 +94,8 @@ const prev = () => {
 const toggle = () => cur < 0 ? play(0) : audio.paused ? audio.play() : audio.pause();
 
 audio.onended = next;
-audio.onplay = audio.onpause = () => $('#play').textContent = audio.paused ? '▶' : '⏸';
+const ICON = { play: '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>', pause: '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>' };
+audio.onplay = audio.onpause = () => $('#play').innerHTML = audio.paused ? ICON.play : ICON.pause;
 (function loop() {
   const d = audio.duration || 0, c = audio.currentTime;
   if (d && !seeking) {
